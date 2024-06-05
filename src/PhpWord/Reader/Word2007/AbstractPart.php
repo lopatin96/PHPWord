@@ -148,7 +148,7 @@ abstract class AbstractPart
     /**
      * Set comment reference.
      */
-    private function setCommentReference(string $type, string $id, AbstractElement $element): self
+    private function setCommentReference(string $type, string $id, ?AbstractElement $element): self
     {
         if (!in_array($type, ['start', 'end'])) {
             throw new InvalidArgumentException('Type must be "start" or "end"');
