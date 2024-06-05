@@ -148,7 +148,7 @@ abstract class AbstractPart
     /**
      * Set comment reference.
      */
-    private function setCommentReference(string $type, string $id, ?AbstractElement $element): self
+    private function setCommentReference(string $type, string $id, ?AbstractElement $element): self // todo: make nullable to fix reading text from a file
     {
         if (!in_array($type, ['start', 'end'])) {
             throw new InvalidArgumentException('Type must be "start" or "end"');
@@ -222,19 +222,20 @@ abstract class AbstractPart
         }
 
         // Formula
-        $xmlReader->registerNamespace('m', 'http://schemas.openxmlformats.org/officeDocument/2006/math');
-        if ($xmlReader->elementExists('m:oMath', $domNode)) {
-            $mathElement = $xmlReader->getElement('m:oMath', $domNode);
-            $mathXML = $mathElement->ownerDocument->saveXML($mathElement);
-            if (is_string($mathXML)) {
-                $reader = new OfficeMathML();
-                $math = $reader->read($mathXML);
-
-                $parent->addFormula($math);
-            }
-
-            return;
-        }
+        // todo: removed to fix reading text from a file
+//        $xmlReader->registerNamespace('m', 'http://schemas.openxmlformats.org/officeDocument/2006/math');
+//        if ($xmlReader->elementExists('m:oMath', $domNode)) {
+//            $mathElement = $xmlReader->getElement('m:oMath', $domNode);
+//            $mathXML = $mathElement->ownerDocument->saveXML($mathElement);
+//            if (is_string($mathXML)) {
+//                $reader = new OfficeMathML();
+//                $math = $reader->read($mathXML);
+//
+//                $parent->addFormula($math);
+//            }
+//
+//            return;
+//        }
 
         // List item
         if ($xmlReader->elementExists('w:pPr/w:numPr', $domNode)) {

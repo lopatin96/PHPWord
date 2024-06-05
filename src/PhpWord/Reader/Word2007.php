@@ -109,6 +109,7 @@ class Word2007 extends AbstractReader implements ReaderInterface
 
         /** @var AbstractPart $part Type hint */
         $part = new $partClass($docFile, $xmlFile);
+        // todo: removed to fix reading text from a file
 //        $part->setImageLoading($this->hasImageLoading());
 //        $part->setRels($relationships);
         $part->setCommentReferences($commentRefs);
